@@ -1,0 +1,14 @@
+div {
+    font-size: 200px;
+    text-align: center;
+    display: table;
+
+    border-radius: 0.25rem;
+    background-color: #f39116;
+    cursor: grab;
+}
+
+span {
+    display: table-cell;
+    vertical-align: middle;
+}
