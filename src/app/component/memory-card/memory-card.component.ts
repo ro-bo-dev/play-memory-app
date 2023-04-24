@@ -22,8 +22,6 @@ export class MemoryCardComponent implements OnInit {
   ngOnInit() {
     this.store.select(selectMemoryCardById(this.id))
     .subscribe((memoryCard) => {
-      //console.log("selectMemoryCardById:changed unveiled");
-      //console.log(memoryCard);
       if (memoryCard) {
         this.unveiled = memoryCard.unveiled;
       }
@@ -31,7 +29,7 @@ export class MemoryCardComponent implements OnInit {
   }
 
   unveil() {
-    console.error("clicked card id: " + this.id + " with number: " + this.sujet);
+    console.log("clicked card id: " + this.id + " with number: " + this.sujet);
     if (!this.unveiled) {
       this.cardService.incrementUnveilCount();
       this.store.dispatch(MemoryCardActions.unveil( { id: this.id } ))

@@ -20,12 +20,16 @@ export class MemoryCardService {
       return memoryCards;
   }
 
+  getUnveilCount() {
+    return this.unveilCount;
+  }
+
   incrementUnveilCount() {
     this.unveilCount++;
   }
 
-  getUnveilCount() {
-    return this.unveilCount;
+  resetUnveilCount() {
+    this.unveilCount = 0;
   }
 
   getCardCount() {

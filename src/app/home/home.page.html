@@ -2,9 +2,9 @@
   <ion-toolbar>
     <ion-title>
       <h2>Play Memory!</h2> 
-      <span>found pairs: {{ foundPairs }} | unveils: {{ unveilCount }} </span>
-      <div style="width: 22em;">
-        <ion-range labelPlacement="start" min="4" max="20" step="2" value="[cardCount]" (ionChange)="onCardCountChange($event)">
+      <span>found pairs: {{ foundPairs }} | unveils: {{ unveilCount }} | times got lucky: {{ gotLucky }} | match on 2nd unveil: {{ matchOnSecondUnveil }}</span>
+      <div style="width: 32em;">
+        <ion-range labelPlacement="start" min="4" max="32" step="2" [(ngModel)]="cardCount" (ionChange)="onCardCountChange(cardCount)">
           <div slot="label">card count: {{ cardCount }}</div>
         </ion-range>
       </div>
