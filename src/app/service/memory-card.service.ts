@@ -3,7 +3,8 @@ import { MemoryCard, MemoryCardModel } from '../model/memory-card.model';
 
 @Injectable({ providedIn: 'root' })
 export class MemoryCardService {
-  cardCount: number = 12;
+  private INITIAL_CARD_COUNT: number = 12;
+
   private unveilCount: number = 0;
 
   constructor() {}
@@ -11,7 +12,7 @@ export class MemoryCardService {
   createMemoryCards(): MemoryCard[] {
     let memoryCards: MemoryCard[] = [];
 
-    for (let i = 0; i < this.cardCount; i++) {
+    for (let i = 0; i < this.getCardCount(); i++) {
         const card = new MemoryCardModel(i, Math.floor(i * .5));
         memoryCards.push(card);
       }
@@ -33,11 +34,27 @@ export class MemoryCardService {
   }
 
   getCardCount() {
-    return this.cardCount;
+    let cardCount: number;
+
+    try {
+      cardCount = localStorage.getItem("app.memory.cardCount") as any as number;
+  
+      if (cardCount == undefined) {
+        cardCount = this.INITIAL_CARD_COUNT;
+        localStorage.setItem("app.memory.cardCount", "" + cardCount);
+      }
+    } catch (error) {
+      cardCount = this.INITIAL_CARD_COUNT;
+    }
+    return cardCount;
   }
 
   setCardCount(count: number) {
-    this.cardCount = count;
+    try {
+      localStorage.setItem("app.memory.cardCount", "" + count);
+    } catch (error) {
+      console.warn("local storage access failed");
+    }
   }
 
   // source: https://bost.ocks.org/mike/shuffle/
