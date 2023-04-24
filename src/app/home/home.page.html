@@ -14,9 +14,8 @@
   </ion-header>
 
   <div class="cards">
-    <app-memory-card *ngFor="let card of memoryCards" [sujet]="card.sujet" [position]="card.position" [boxSize]="boxSize" class="card"></app-memory-card>
+    <app-memory-card *ngFor="let card of memoryCards$ | async;" [id]="card.id" [sujet]="card.sujet" [boxSize]="boxSize" class="card"></app-memory-card>
   </div>
-
   
 </ion-content>
 

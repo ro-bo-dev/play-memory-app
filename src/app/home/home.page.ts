@@ -1,59 +1,35 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { MemoryCardModel } from '../model/memory-card.model';
+import { MemoryCardService } from '../service/memory-card.service';
+import { Store } from '@ngrx/store';
+import { selectMemoryCards } from '../state/memory-card.selector';
+import { MemoryCardActions } from '../state/memory-card.actions';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
+  providers: [ MemoryCardService ]
 })
 export class HomePage {
 
-  cardCount: number = 12;
-  memoryCards: MemoryCardModel[] = [];
+  memoryCards$ = this.store.select(selectMemoryCards);
 
   boxSize: number = 100;
 
-  constructor() {
+  constructor(private memoryCardService: MemoryCardService, private store: Store) {
     this.getBoxSize();
-
-    for (let i = 0; i < this.cardCount; i++) {
-      const card = new MemoryCardModel(Math.floor(i * .5), i);
-      this.memoryCards.push(card);
-    }
-
-    this.shuffle(this.memoryCards);
   }
 
   ngOnInit() {
+    let memoryCards = this.memoryCardService.createMemoryCards();
+    this.store.dispatch(MemoryCardActions.createMemoryCards({ memoryCards }))
   }
 
   getBoxSize() {
     let totalSurface = window.innerWidth * window.innerHeight;
-    let boxSurface = totalSurface / this.cardCount;
+    let boxSurface = totalSurface / this.memoryCardService.cardCount;
     this.boxSize = Math.sqrt(boxSurface) * .8;
-
-    console.log(window.innerHeight, window.innerWidth);
-    console.log(boxSurface);
-    console.log(this.boxSize);
-  }
-
-  // source: https://bost.ocks.org/mike/shuffle/
-  shuffle(array: any[]) {
-    var m = array.length, t, i;
-  
-    // While there remain elements to shuffle…
-    while (m) {
-  
-      // Pick a remaining element…
-      i = Math.floor(Math.random() * m--);
-  
-      // And swap it with the current element.
-      t = array[m];
-      array[m] = array[i];
-      array[i] = t;
-    }
-  
-    return array;
   }
 
 }

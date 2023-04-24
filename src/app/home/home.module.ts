@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { MemoryCardComponent } from '../components/memory-card/memory-card.component';
+import { MemoryCardComponent } from '../component/memory-card/memory-card.component';
 
 
 @NgModule({

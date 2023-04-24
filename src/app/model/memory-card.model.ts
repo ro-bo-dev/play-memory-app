@@ -1,13 +1,20 @@
-export class MemoryCardModel {
+export class MemoryCardModel implements MemoryCard {
+    id: number;
     sujet: number;
-    position: number;
+    unveiled: boolean;
+    uncovered: boolean;
 
-    constructor(sujet: number, position: number) {
-            this.sujet = sujet;
-            this.position = position;
+    constructor(id: number, sujet: number) {
+        this.id = id;
+        this.sujet = sujet;
+        this.unveiled = false;
+        this.uncovered = false;
     }
+}
 
-    //getSalary() : number {
-    //    return 10000;
-    //}
+export interface MemoryCard {
+    id: number;
+    sujet: number;
+    unveiled: boolean;
+    uncovered: boolean;
 }
