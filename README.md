@@ -13,7 +13,7 @@
 Find all pairs with as few unveils as possible
 
 **Stats:**
-* found pairs: found pairs of cards with matching number
-* unveils: times you unveiled a card 
-* times got lucky: times you got a pair on first unveil (1 means two matching cards on first unveil)
-* match on 2nd unveil: number of cards you matched on second unveil
+* *found pairs* - found pairs of cards with matching number
+* *unveils* - times you unveiled a card 
+* *times got lucky* - times you got a pair on first unveil (1 means two matching cards on first unveil)
+* *match on 2nd unveil* - number of cards you matched on second unveil
