@@ -8,6 +8,10 @@ div {
     cursor: grab;
 }
 
+div:hover {
+    opacity: 50%;
+}
+
 span {
     display: table-cell;
     vertical-align: middle;
