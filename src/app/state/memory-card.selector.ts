@@ -5,7 +5,7 @@ export const selectMemoryCards = createFeatureSelector<MemoryCard[]>('memoryCard
 
 export const selectMemoryCardById = (id: number) => createSelector(selectMemoryCards, (allItems) => {
     if (allItems) {
-        console.warn("selected card id " + id);
+        //console.warn("selected card id " + id);
       return allItems.find(memoryCard => memoryCard.id === id);
     } else {
       return undefined;

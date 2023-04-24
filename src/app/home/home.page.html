@@ -1,17 +1,21 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Play Memory!
+      <h2>Play Memory!</h2> 
+      <span>found pairs: {{ foundPairs }} | unveils: {{ unveilCount }} </span>
+      <div style="width: 22em;">
+        <ion-range labelPlacement="start" min="4" max="20" step="2" value="[cardCount]" (ionChange)="onCardCountChange($event)">
+          <div slot="label">card count: {{ cardCount }}</div>
+        </ion-range>
+      </div>
+      <span style="float: right;">
+        <ion-button (click)="window.location.reload()">Restart</ion-button>
+      </span>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
   <div class="cards">
     <app-memory-card *ngFor="let card of memoryCards$ | async;" [id]="card.id" [sujet]="card.sujet" [boxSize]="boxSize" class="card"></app-memory-card>

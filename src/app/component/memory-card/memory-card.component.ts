@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { MemoryCardService } from 'src/app/service/memory-card.service';
 import { MemoryCardActions } from 'src/app/state/memory-card.actions';
 import { selectMemoryCardById, selectMemoryCards } from 'src/app/state/memory-card.selector';
 
@@ -15,14 +16,14 @@ export class MemoryCardComponent implements OnInit {
   @Input() boxSize: number = 100;
   unveiled: boolean = false;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private cardService: MemoryCardService) {
   }
 
   ngOnInit() {
     this.store.select(selectMemoryCardById(this.id))
     .subscribe((memoryCard) => {
-      console.log("selectMemoryCardById:changed unveiled");
-      console.log(memoryCard);
+      //console.log("selectMemoryCardById:changed unveiled");
+      //console.log(memoryCard);
       if (memoryCard) {
         this.unveiled = memoryCard.unveiled;
       }
@@ -30,11 +31,11 @@ export class MemoryCardComponent implements OnInit {
   }
 
   unveil() {
-    if (!this.unveiled)
+    console.error("clicked card id: " + this.id + " with number: " + this.sujet);
+    if (!this.unveiled) {
+      this.cardService.incrementUnveilCount();
       this.store.dispatch(MemoryCardActions.unveil( { id: this.id } ))
-
-    console.log("unveil");
-    console.log(this.unveiled);
+    }
   }
 
 }

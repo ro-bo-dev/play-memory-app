@@ -14,16 +14,38 @@ import { MemoryCardActions } from '../state/memory-card.actions';
 export class HomePage {
 
   memoryCards$ = this.store.select(selectMemoryCards);
+  foundPairs: number = 0;
+  unveilCount: number = 0;
+  cardCount: number;
 
   boxSize: number = 100;
+  window: any = window;
 
   constructor(private memoryCardService: MemoryCardService, private store: Store) {
     this.getBoxSize();
+    this.cardCount = memoryCardService.getCardCount();
   }
 
   ngOnInit() {
     let memoryCards = this.memoryCardService.createMemoryCards();
     this.store.dispatch(MemoryCardActions.createMemoryCards({ memoryCards }))
+
+    this.memoryCards$.subscribe((memoryCards => {
+      this.foundPairs = Math.floor(memoryCards.filter(memoryCard => memoryCard.uncovered === true).length * .5);
+      this.unveilCount = this.memoryCardService.getUnveilCount();
+
+      console.log("memCards changed");
+      console.log("found pairs: " + this.foundPairs);
+    }));
+  }
+
+  onCardCountChange(event: any) {
+    this.cardCount = event.detail.value;
+    this.memoryCardService.setCardCount(this.cardCount);
+    let memoryCards = this.memoryCardService.createMemoryCards();
+    this.store.dispatch(MemoryCardActions.createMemoryCards({ memoryCards }))
+    console.log(event);
+    console.log(event.detail.value);
   }
 
   getBoxSize() {

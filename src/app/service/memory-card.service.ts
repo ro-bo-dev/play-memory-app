@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-
-import { of, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { MemoryCard, MemoryCardModel } from '../model/memory-card.model';
 
 @Injectable({ providedIn: 'root' })
 export class MemoryCardService {
   cardCount: number = 12;
+  private unveilCount: number = 0;
 
   constructor() {}
 
@@ -20,6 +18,22 @@ export class MemoryCardService {
   
       this.shuffle(memoryCards);
       return memoryCards;
+  }
+
+  incrementUnveilCount() {
+    this.unveilCount++;
+  }
+
+  getUnveilCount() {
+    return this.unveilCount;
+  }
+
+  getCardCount() {
+    return this.cardCount;
+  }
+
+  setCardCount(count: number) {
+    this.cardCount = count;
   }
 
   // source: https://bost.ocks.org/mike/shuffle/
